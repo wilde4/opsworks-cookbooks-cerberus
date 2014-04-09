@@ -130,3 +130,10 @@ end
 
 desc 'run all checks'
 task :default => [:validate_syntax, :validate_literal_includes, :validate_best_practises, :validate_attribute_dependencies, :validate_customize]
+
+begin
+  require 'kitchen/rake_tasks'
+  Kitchen::RakeTasks.new
+rescue LoadError
+  puts ">>>>> Kitchen gem not loaded, omitting tasks" unless ENV['CI']
+end
