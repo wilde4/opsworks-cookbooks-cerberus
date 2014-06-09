@@ -1,7 +1,5 @@
 nodes = search(:node, "name:*")
-Chef::Log.info nodes
-nodes.each {|n| Chef::Log.info "====> #{n["opsworks"]["layers"]}" }
-app_servers = nodes.select {|n| n["layers"]["rails-app"] rescue nil }
+app_servers = nodes.select {|n| n["opsworks"]["layers"]["rails-app"] rescue nil }
 
 template '/home/deploy/theme_sync.sh' do
   source "theme_sync.sh.erb"
