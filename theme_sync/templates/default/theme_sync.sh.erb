@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+# Sync themes after compilation
+
+<% opsworks["layers"]["rails-app-server"]["instances"].each do |name,remote_server| %>
+rsync -av <%= "local_folder" %> <%= remote_server["private_ip"]:FOLDER_NAME %>
+<% end %>
