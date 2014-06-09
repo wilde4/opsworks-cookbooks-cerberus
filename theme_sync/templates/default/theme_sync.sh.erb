@@ -2,10 +2,10 @@
 #
 # Sync themes after compilation
 
-<% @nodes.each do |name,remote_server| %>
+<% @nodes.each do |name| %>
 ===
 <%= name %>
 ---
-<%= remote_server.attributes["opsworks"] %>
+<%= name.attributes["opsworks"] %>
 ===
 <% end %>
