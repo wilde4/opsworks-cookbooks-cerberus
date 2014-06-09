@@ -8,10 +8,10 @@ REMOTE_PATH='/srv/www/oliver/shared/public/assets'
 <% ips = [] %>
 <% @nodes.each do |node| %>
   <% if node.attributes.attribute?(:private_ip) && node.attributes.private_ip -%>
-    <% ip << node.attributes.private_ip %>
+    <% ips << node.attributes.private_ip %>
   <% end -%>
   <% if node.attributes.attribute?(:ip) && node.attributes.ip -%>
-    <% ip << node.attributes.ip %>
+    <% ips << node.attributes.ip %>
   <% end -%>
 <% end %>
 
