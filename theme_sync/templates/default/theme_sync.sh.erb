@@ -2,7 +2,7 @@
 #
 # Sync themes after compilation
 
-<% nodes.each do |server| %>
+<% @nodes.each do |node| %>
 <% if node.attributes.attribute?(:private_ip) && node.attributes.private_ip -%>
   <% ip = node.attributes.private_ip %>
 <% end -%>
