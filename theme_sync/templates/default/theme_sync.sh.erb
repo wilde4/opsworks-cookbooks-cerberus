@@ -2,12 +2,23 @@
 #
 # Sync themes after compilation
 
+CURPATH=`pwd`
+
 <% @nodes.each do |node| %>
-<% if node.attributes.attribute?(:private_ip) && node.attributes.private_ip -%>
-  <% ip = node.attributes.private_ip %>
-<% end -%>
-<% if node.attributes.attribute?(:ip) && node.attributes.ip -%>
-  <% ip = node.attributes.ip %>
-<% end -%>
-rsync -av <%= "local_folder" %> <%= ip %>:FOLDER_NAME
+  <% if node.attributes.attribute?(:private_ip) && node.attributes.private_ip -%>
+    <% ip = node.attributes.private_ip %>
+  <% end -%>
+  <% if node.attributes.attribute?(:ip) && node.attributes.ip -%>
+    <% ip = node.attributes.ip %>
+  <% end -%>
 <% end %>
+
+inotifywait -mr --timefmt '%d/%m/%y %H:%M' --format '%T %w %f' -e close_write /usr/share/owncloud/data/admin/files | while read date time dir file; do
+
+  FILECHANGE=${dir}${file}
+  # convert absolute path to relative
+  FILECHANGEREL=`echo "$FILECHANGE" | sed 's_'$CURPATH'/__'`
+
+  rsync --progress --relative -vrae 'ssh -p 22'  $FILECHANGEREL deploy@<%= ip %>:/somewhere && \
+  echo "At ${time} on ${date}, file $FILECHANGE was backed up via rsync"
+done
