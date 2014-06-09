@@ -1,4 +1,4 @@
-Chef::Logger.info "Node info: #{search(:node, "name:*")}"
+Chef::Log.info "Node info: #{search(:node, "name:*")}"
 
 template '/home/deploy/theme_sync.sh' do
   source "theme_sync.sh.erb"
