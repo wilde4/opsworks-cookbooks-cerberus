@@ -4,6 +4,7 @@
 
 CURPATH=`pwd`
 
+<% ip = "" %>
 <% @nodes.each do |node| %>
   <% if node.attributes.attribute?(:private_ip) && node.attributes.private_ip -%>
     <% ip = node.attributes.private_ip %>
