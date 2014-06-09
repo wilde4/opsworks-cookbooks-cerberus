@@ -2,7 +2,7 @@
 #
 # Sync themes after compilation
 
-CURPATH=`pwd`
+THEMES_PATH='/usr/share/owncloud/data/admin/files'
 
 <% ip = "" %>
 <% @nodes.each do |node| %>
@@ -18,8 +18,11 @@ inotifywait -mr --timefmt '%d/%m/%y %H:%M' --format '%T %w %f' -e close_write /u
 
   FILECHANGE=${dir}${file}
   # convert absolute path to relative
-  FILECHANGEREL=`echo "$FILECHANGE" | sed 's_'$CURPATH'/__'`
+  FILECHANGEREL=`echo "$FILECHANGE" | sed 's_'$THEMES_PATH'/__'`
+  THEME=`ruby -e "puts '$FILECHANGE'.match(/admin\/files\/(\w*)\//)[1]"`
 
-  rsync --progress --relative -vrae 'ssh -p 22'  $FILECHANGEREL deploy@<%= ip %>:/somewhere && \
-  echo "At ${time} on ${date}, file $FILECHANGE was backed up via rsync"
+  echo "THEME: $THEME"
+
+  # rsync --progress --relative -vrae 'ssh -p 22'  $FILECHANGEREL deploy@<%= ip %>:/somewhere && \
+  # echo "At ${time} on ${date}, file $FILECHANGE was backed up via rsync"
 done
