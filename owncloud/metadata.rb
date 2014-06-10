@@ -12,9 +12,6 @@ supports 'ubuntu'
 
 depends 'apt'
 depends 'nginx'
-depends 'php'
-depends 'php-fpm', '>= 0.6.0'
-depends 'postfix'
 
 suggests 'git'
 
@@ -105,13 +102,6 @@ attribute 'owncloud/web_server',
   :type => 'string',
   :required => 'optional',
   :default => 'apache'
-
-attribute 'owncloud/php-fpm/pool',
-  :display_name => 'PHP-FPM pool',
-  :description => 'PHP-FPM pool name to use with ownCloud',
-  :type => 'string',
-  :required => 'optional',
-  :default => '"owncloud"'
 
 attribute 'owncloud/max_upload_size',
   :display_name => 'Max Upload Size',

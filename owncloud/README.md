@@ -14,14 +14,10 @@ Requirements
 
 ## Cookbooks:
 
-* apache2
 * apt
 * database
 * mysql
 * nginx
-* php
-* php-fpm
-* postfix
 * postgresql
 
 Attributes
