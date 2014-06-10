@@ -24,9 +24,9 @@
 include_recipe 'nginx'
 
 # Disable default site
-nginx_site 'default' do
-  enable false
-end
+# nginx_site 'default' do
+#   enable false
+# end
 
 fastcgi_pass = "unix:/var/run/php-fpm-#{node['owncloud']['php-fpm']['pool']}.sock"
 
