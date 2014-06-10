@@ -1,4 +1,4 @@
-require 'openssl'
+# require 'openssl'
 
 module OwnCloud
   class Certificate
