@@ -100,11 +100,6 @@ Attributes
     <td><code>"512M"</code></td>
   </tr>
   <tr>
-    <td><code>node['owncloud']['ssl']</code></td>
-    <td>Whether ownCloud should accept requests through SSL</td>
-    <td><code>true</code></td>
-  </tr>
-  <tr>
     <td><code>node['owncloud']['ssl_key_dir']</code></td>
     <td>The directory to save the generated private SSL key</td>
     <td><em>calculated</em></td>
