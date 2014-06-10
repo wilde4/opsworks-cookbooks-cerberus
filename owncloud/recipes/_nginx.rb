@@ -48,7 +48,7 @@ template File.join(node['nginx']['dir'], 'sites-available', 'owncloud') do
   notifies :reload, 'service[nginx]'
 end
 
-nginx_site 'owncloud' do
-  enable true
-end
+# nginx_site 'owncloud' do
+#   enable true
+# end
 
