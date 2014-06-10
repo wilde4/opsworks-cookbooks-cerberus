@@ -10,16 +10,11 @@ supports 'centos'
 supports 'debian'
 supports 'ubuntu'
 
-# depends 'apache2'
 depends 'apt'
-# depends 'database'
-depends 'mysql'
 depends 'nginx'
-# depends 'openssl'
 depends 'php'
 depends 'php-fpm', '>= 0.6.0'
 depends 'postfix'
-# depends 'postgresql'
 
 suggests 'git'
 
