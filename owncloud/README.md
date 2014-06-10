@@ -19,7 +19,6 @@ Requirements
 * database
 * mysql
 * nginx
-* openssl
 * php
 * php-fpm
 * postfix

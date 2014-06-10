@@ -120,27 +120,6 @@ attribute 'owncloud/max_upload_size',
   :required => 'optional',
   :default => '"512M"'
 
-attribute 'owncloud/ssl',
-  :display_name => 'ownCloud Use SSL?',
-  :description => 'Whether ownCloud should accept requests through SSL',
-  :choice => [ 'true', 'false' ],
-  :type => 'string',
-  :required => 'optional',
-  :default => 'true'
-
-attribute 'owncloud/ssl_key_dir',
-  :display_name => 'SSL key directory',
-  :description => 'The directory to save the generated private SSL key',
-  :type => 'string',
-  :required => 'optional',
-  :calculated => true
-
-attribute 'owncloud/ssl_cert_dir',
-  :display_name => 'SSL certificate directory',
-  :description => 'The directory path to save the generated public SSL certificate',
-  :type => 'string',
-  :required => 'optional',
-  :calculated => true
 
 attribute 'owncloud/admin/user',
   :display_name => 'ownCloud Admin Username',
@@ -227,14 +206,6 @@ attribute 'owncloud/config/mail_smtptimeout',
   :type => 'string',
   :required => 'optional',
   :default => '10'
-
-attribute 'owncloud/config/mail_smtpsecure',
-  :display_name => 'ownCloud Mail SMTP Secure',
-  :description => 'SMTP connection prefix or sending mail, depends on mail_smtpmode if this is used. Can be "", ssl or tls',
-  :choice => [ '""', '"ssl"', '"tls"' ],
-  :type => 'string',
-  :required => 'optional',
-  :default => '""'
 
 attribute 'owncloud/config/mail_smtpauth',
   :display_name => 'ownCloud Mail SMTP Auth',
