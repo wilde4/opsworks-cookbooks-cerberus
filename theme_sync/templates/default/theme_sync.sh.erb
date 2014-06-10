@@ -2,7 +2,7 @@
 #
 # Sync themes after compilation
 
-THEMES_PATH='/usr/share/owncloud/data/admin/files'
+THEMES_PATH='/owncloud-data/admin/files'
 REMOTE_PATH='/srv/www/oliver/shared/public/assets'
 
 <% ips = [] %>
@@ -20,9 +20,9 @@ inotifywait -mr --timefmt '%d/%m/%y %H:%M' --format '%T %w %f' -e close_write $T
   FILECHANGE=${dir}${file}
   # convert absolute path to relative
   FILECHANGEREL=`echo "$FILECHANGE" | sed 's_'$THEMES_PATH'/__'`
-  THEME=`ruby -e "puts '$FILECHANGE'.match(/admin\/files\/(\w*)\//)[1]"`
-
-  echo "THEME: $THEME"
+  
+  # THEME=`ruby -e "puts '$FILECHANGE'.match(/admin\/files\/(\w*)\//)[1]"`
+  # echo "THEME: $THEME"
 
   <% ips.each do |ip| -%>
   echo rsync --progress --relative -vrae 'ssh -p 22' $FILECHANGEREL deploy@<%= ip %>:$REMOTE_PATH && \
