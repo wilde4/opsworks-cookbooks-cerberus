@@ -96,7 +96,8 @@ end
 web_server = node['owncloud']['web_server']
 
 include_recipe 'owncloud::_nginx'
-web_services = [ 'nginx', 'php-fpm' ]
+web_services = [ 'nginx' ]
+# web_services = [ 'nginx', 'php-fpm' ]
 
 #==============================================================================
 # Initialize configuration file and install ownCloud
