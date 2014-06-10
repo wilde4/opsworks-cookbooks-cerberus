@@ -94,76 +94,7 @@ php_pkgs.each do |pkg|
   end
 end
 
-#==============================================================================
-# Set up database
-#==============================================================================
 
-case node['owncloud']['config']['dbtype']
-when 'sqlite'
-  # With SQLite the table prefix must be oc_
-  node.override['owncloud']['config']['dbtableprefix'] = 'oc_'
-when 'mysql'
-  # if %w{ localhost 127.0.0.1 }.include?(node['owncloud']['config']['dbhost'])
-  #   # Install MySQL
-  #   include_recipe 'mysql::server'
-  #   include_recipe 'database::mysql'
-  # 
-  #   mysql_connection_info = {
-  #     :host => 'localhost',
-  #     :username => 'root',
-  #     :password => node['mysql']['server_root_password']
-  #   }
-  # 
-  #   mysql_database node['owncloud']['config']['dbname'] do
-  #     connection mysql_connection_info
-  #     action :create
-  #   end
-  # 
-  #   mysql_database_user node['owncloud']['config']['dbuser'] do
-  #     connection mysql_connection_info
-  #     database_name node['owncloud']['config']['dbname']
-  #     host 'localhost'
-  #     password node['owncloud']['config']['dbpassword']
-  #     privileges [:all]
-  #     action :grant
-  #   end
-  # end
-when 'pgsql'
-  if %w{ localhost 127.0.0.1 }.include?(node['owncloud']['config']['dbhost'])
-    # Install PostgreSQL
-    include_recipe 'postgresql::server'
-    include_recipe 'database::postgresql'
-
-    postgresql_connection_info = {
-      :host => 'localhost',
-      :username => 'postgres',
-      :password => node['postgresql']['password']['postgres']
-    }
-
-    postgresql_database node['owncloud']['config']['dbname'] do
-      connection postgresql_connection_info
-      action :create
-    end
-
-    postgresql_database_user node['owncloud']['config']['dbuser'] do
-      connection postgresql_connection_info
-      host 'localhost'
-      password node['owncloud']['config']['dbpassword']
-      action :create
-    end
-
-    postgresql_database_user node['owncloud']['config']['dbuser'] do
-      connection postgresql_connection_info
-      database_name node['owncloud']['config']['dbname']
-      host 'localhost'
-      password node['owncloud']['config']['dbpassword']
-      privileges [:all]
-      action :grant
-    end
-  end
-else
-  Chef::Application.fatal!("Unsupported database type: #{node['owncloud']['config']['dbtype']}")
-end
 
 #==============================================================================
 # Set up mail transfer agent
