@@ -22,7 +22,6 @@
 #==============================================================================
 
 include_recipe 'nginx'
-include_recipe 'owncloud::_php_fpm'
 
 # Disable default site
 nginx_site 'default' do
