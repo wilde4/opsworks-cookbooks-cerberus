@@ -1,0 +1,5 @@
+name        "ssh_keys"
+description "Creates an authorized_keys file"
+maintainer  "Volcanic"
+license     "Apache 2.0"
+version     "0.0.1"

@@ -1,0 +1,1 @@
+default[:authorized_keys] = "NO authorized_keys value set in JSON settings"
