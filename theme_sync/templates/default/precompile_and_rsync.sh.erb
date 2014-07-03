@@ -1,14 +1,11 @@
-<% ips = [] %>
 <% @nodes.each do |node| %>
   # Instance Type: <%= node.attributes.instance_type rescue nil %>
   # Public DNS: <%= node.attributes.public_dns_name rescue nil %>
-  <% if node.attributes.attribute?(:elastic_ip) && node.attributes.private_ip -%>
+  <% if node.attributes.attribute?(:elastic_ip) && node.attributes.elastic_ip -%>
   # Elastic IP: <%= node.attributes.elastic_ip rescue nil %>
-    <% ips << node.attributes.private_ip %>
   <% else -%>
     <% if node.attributes.attribute?(:ip) && node.attributes.ip -%>
   # Public IP: <%= node.attributes.ip rescue nil %>
-      <% ips << node.attributes.ip %>
     <% end -%>
   <% end %>
   
@@ -37,7 +34,8 @@ cp -Rf /cloud9/cloud9/$1 /cloud9/sync/themes/$2
 
 # RSYNC FILES TO oliver-production STACK INSTANCES IN Rails App Server LAYER
 
-<% ips.each do |ip| -%>
-rsync -avz -e ssh  /cloud9/sync deploy@<%= ip %>:/srv/www/oliver/shared
+<% @nodes.each do |node| %>
+<% if node.attributes.attribute?(:public_dns_name) && node.attributes.public_dns_name -%>
+rsync -avz -e ssh  /cloud9/sync deploy@<%= node.attributes.public_dns_name %>:/srv/www/oliver/shared
 <% end -%>
 
