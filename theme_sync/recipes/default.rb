@@ -38,3 +38,12 @@ template '/home/deploy/precompile_and_rsync.sh' do
   mode "0777"
   variables(:nodes => app_servers)
 end
+
+# ======================================
+# = Copy the push script to the devbox =
+# ======================================
+
+execute "copy rsync bash script to dev box" do
+  command "scp /home/deploy/precompile_and_rsync.sh deploy@#{node[:theme_sync][:ip]}:/cloud9/precompiled_assets/oliver-precompile/"
+  user "deploy"
+end
