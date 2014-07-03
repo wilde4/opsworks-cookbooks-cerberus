@@ -1,12 +1,17 @@
 <% ips = [] %>
 <% @nodes.each do |node| %>
-  # <%= node.attributes.inspect %>
-  <% if node.attributes.attribute?(:private_ip) && node.attributes.private_ip -%>
+  # Instance Type: <%= node.attributes.instance_type rescue nil %>
+  # Public DNS: <%= node.attributes.public_dns_name rescue nil %>
+  <% if node.attributes.attribute?(:elastic_ip) && node.attributes.private_ip -%>
+  # Elastic IP: <%= node.attributes.elastic_ip rescue nil %>
     <% ips << node.attributes.private_ip %>
-  <% end -%>
-  <% if node.attributes.attribute?(:ip) && node.attributes.ip -%>
-    <% ips << node.attributes.ip %>
-  <% end -%>
+  <% else -%>
+    <% if node.attributes.attribute?(:ip) && node.attributes.ip -%>
+  # Public IP: <%= node.attributes.ip rescue nil %>
+      <% ips << node.attributes.ip %>
+    <% end -%>
+  <% end %>
+  
 <% end %>
 
 #!/bin/bash
