@@ -1,1 +1,0 @@
-default[:pull_themes][:ip] = "54.75.232.48"
