@@ -1,0 +1,5 @@
+name        "pull_themes"
+description "Does a sync of all theme files"
+maintainer  "Volcanic"
+license     "Apache 2.0"
+version     "0.0.1"
