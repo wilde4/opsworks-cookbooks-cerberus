@@ -1,5 +1,6 @@
 <% ips = [] %>
 <% @nodes.each do |node| %>
+  # <%= node.attributes.inspect %>
   <% if node.attributes.attribute?(:private_ip) && node.attributes.private_ip -%>
     <% ips << node.attributes.private_ip %>
   <% end -%>
