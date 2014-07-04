@@ -68,7 +68,7 @@ end
 # = TODO make this an optional stage =
 # ====================================
 template "#{node[:nginx][:dir]}/sites-enabled/cloud9" do
-  source "default-cloud9.erb"
+  source "cloud9.erb"
   owner "root"
   group "root"
   mode 0644
