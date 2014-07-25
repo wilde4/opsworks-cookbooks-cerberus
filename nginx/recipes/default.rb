@@ -64,14 +64,13 @@ template "#{node[:nginx][:dir]}/sites-available/default" do
   mode 0644
 end
 
-# ====================================
-# = TODO make this an optional stage =
-# ====================================
-template "#{node[:nginx][:dir]}/sites-enabled/cloud9" do
-  source "cloud9.erb"
-  owner "root"
-  group "root"
-  mode 0644
+if node[:cloud9]
+  template "#{node[:nginx][:dir]}/sites-enabled/cloud9" do
+    source "cloud9.erb"
+    owner "root"
+    group "root"
+    mode 0644
+  end
 end
 
 include_recipe "nginx::service"
