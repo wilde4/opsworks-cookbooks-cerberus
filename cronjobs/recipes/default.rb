@@ -5,6 +5,7 @@
 #
 # Create custom cron jobs using configuration values in the Custom JSON
 #
+# https://github.com/onema/opsworks-chef-cookbooks/blob/develop/README.md#cronjobs
 
 node[:custom_env][:cron_jobs].each do |cron_values|
   cron "#{cron_values[:name]}" do
