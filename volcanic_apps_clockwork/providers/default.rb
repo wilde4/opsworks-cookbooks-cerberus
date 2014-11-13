@@ -36,7 +36,7 @@ action :create do
 
   template "/usr/local/bin/stop_clockwork_#{name}.sh" do
     source 'stop_clockwork.sh.erb'
-    cookbook 'opsworks_clockwork'
+    cookbook 'volcanic_apps_clockwork'
     owner user
     group group
     mode 0755
@@ -51,7 +51,7 @@ action :create do
 
   template "/usr/local/bin/start_clockwork_#{name}.sh" do
     source 'start_clockwork.sh.erb'
-    cookbook 'opsworks_clockwork'
+    cookbook 'volcanic_apps_clockwork'
     owner user
     group group
     mode 0755
@@ -66,7 +66,7 @@ action :create do
 
   template "#{node.default["monit"]["conf_dir"]}/clockwork_#{name}.monitrc" do
     source 'clockwork.monitrc.erb'
-    cookbook 'opsworks_clockwork'
+    cookbook 'volcanic_apps_clockwork'
     owner 'root'
     group 'root'
     mode '0644'
