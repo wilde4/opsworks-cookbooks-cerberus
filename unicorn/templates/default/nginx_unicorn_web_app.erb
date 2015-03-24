@@ -54,6 +54,10 @@ server {
     }
   }
 
+  location ~* \.(eot|ttf|woff)$ {
+    add_header Access-Control-Allow-Origin *;
+  }
+
   location /nginx_status {
     stub_status on;
     access_log off;
