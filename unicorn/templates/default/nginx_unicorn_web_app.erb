@@ -61,13 +61,13 @@ server {
   # }
 
   <% if @application[:rails_env] == 'remote_development' %>
-    # location ~* \.(?:jpg|jpeg|png|gif|ico|css|js)$ {
-    #   root /srv/www/oliver/current/app/themes;
-    #   expires 1y;
-    #   add_header Cache-Control "public";
-    # }
+    # DO NOT WANT TO CACHE ALL THE THINGS
   <% else %>
-    # NOT REMOTE DEVELOPMENT ENVIRONMENT
+    location ~* \.(?:jpg|jpeg|png|gif|ico|css|js)$ {
+      root /srv/www/oliver/current/public;
+      expires 1y;
+      add_header Cache-Control "public";
+    }
   <% end %>
 
   location /nginx_status {
