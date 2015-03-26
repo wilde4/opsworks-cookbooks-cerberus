@@ -58,8 +58,9 @@ server {
     add_header Access-Control-Allow-Origin *;
   }
 
-  location ~*  \.(jpg|jpeg|png|gif|ico|css|js)$ {
-    expires 365d;
+  location ~* \.(jpg|jpeg|png|gif|ico|css|js)$ {
+    expires 1y;
+    add_header Cache-Control "public";
   }
 
   location /nginx_status {
