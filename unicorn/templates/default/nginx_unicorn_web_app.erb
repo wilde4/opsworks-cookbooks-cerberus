@@ -54,11 +54,11 @@ server {
     }
   }
 
-  location ~* \.(eot|ttf|woff)$ {
+  location ~* \.(?:eot|ttf|woff)$ {
     add_header Access-Control-Allow-Origin *;
   }
 
-  location ~* \.(jpg|jpeg|png|gif|ico|css|js)$ {
+  location ~* \.(?:jpg|jpeg|png|gif|ico|css|js)$ {
     expires 1y;
     add_header Cache-Control "public";
   }
