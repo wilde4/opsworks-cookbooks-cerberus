@@ -4,7 +4,7 @@ upstream unicorn_<%= @application[:domains].first %> {
 
 server {
   
-  # Application Name: <%= @application_name %>
+  # Application Name: <%= @application_name %>, Environment: <%= @application[:rails_env] %>
 
   disable_symlinks off;
   
@@ -60,11 +60,15 @@ server {
   #   add_header Access-Control-Allow-Origin *;
   # }
 
-  location ~* \.(?:jpg|jpeg|png|gif|ico|css|js)$ {
-    root /srv/www/oliver/current/app/themes/remote_development;
-    expires 1y;
-    add_header Cache-Control "public";
-  }
+  <% if @application[:rails_env] == 'remote_development' %>
+    # location ~* \.(?:jpg|jpeg|png|gif|ico|css|js)$ {
+    #   root /srv/www/oliver/current/app/themes;
+    #   expires 1y;
+    #   add_header Cache-Control "public";
+    # }
+  <% else %>
+    # NOT REMOTE DEVELOPMENT ENVIRONMENT
+  <% end %>
 
   location /nginx_status {
     stub_status on;
