@@ -58,6 +58,10 @@ server {
     add_header Access-Control-Allow-Origin *;
   }
 
+  location ~*  \.(jpg|jpeg|png|gif|ico|css|js)$ {
+    expires 365d;
+  }
+
   location /nginx_status {
     stub_status on;
     access_log off;
