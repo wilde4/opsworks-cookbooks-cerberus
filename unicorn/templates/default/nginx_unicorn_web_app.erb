@@ -5,6 +5,8 @@ upstream unicorn_<%= @application[:domains].first %> {
 server {
   
   # Application Name: <%= @application_name %>
+
+  disable_symlinks off;
   
   <% if node[:default_app] && (node[:default_app].to_s == @application_name.to_s) %>
   listen 80 default_server;
