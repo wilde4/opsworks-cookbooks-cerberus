@@ -61,7 +61,7 @@ server {
   # }
 
   location ~* \.(?:jpg|jpeg|png|gif|ico|css|js)$ {
-    root /srv/www/oliver/current/app/themes/remote_development
+    root /srv/www/oliver/current/app/themes/remote_development;
     expires 1y;
     add_header Cache-Control "public";
   }
