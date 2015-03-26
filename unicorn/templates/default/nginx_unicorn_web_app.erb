@@ -56,9 +56,9 @@ server {
     }
   }
 
-  # location ~* \.(?:eot|ttf|woff)$ {
-  #   add_header Access-Control-Allow-Origin *;
-  # }
+  location ~* \.(?:eot|ttf|woff)$ {
+    add_header Access-Control-Allow-Origin *;
+  }
 
   <% if @application[:rails_env] == 'remote_development' %>
     # DO NOT WANT TO CACHE ALL THE THINGS
