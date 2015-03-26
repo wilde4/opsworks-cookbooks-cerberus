@@ -6,7 +6,7 @@ server {
   
   # Application Name: <%= @application_name %>
 
-  disable_symlinks off;
+  # disable_symlinks off;
   
   <% if node[:default_app] && (node[:default_app].to_s == @application_name.to_s) %>
   listen 80 default_server;
@@ -60,11 +60,11 @@ server {
     add_header Access-Control-Allow-Origin *;
   }
 
-  location ~* \.(?:jpg|jpeg|png|gif|ico|css|js)$ {
-    root /cloud9/cloud9;
-    expires 1y;
-    add_header Cache-Control "public";
-  }
+  # location ~* \.(?:jpg|jpeg|png|gif|ico|css|js)$ {
+  #   root /cloud9/cloud9;
+  #   expires 1y;
+  #   add_header Cache-Control "public";
+  # }
 
   location /nginx_status {
     stub_status on;
