@@ -2,11 +2,15 @@ upstream unicorn_<%= @application[:domains].first %> {
  server unix:<%= @application[:deploy_to]%>/shared/sockets/unicorn.sock fail_timeout=0;
 }
 
+http {
+  disable_symlinks off;
+}
+
 server {
   
   # Application Name: <%= @application_name %>
 
-  # disable_symlinks off;
+  disable_symlinks off;
   
   <% if node[:default_app] && (node[:default_app].to_s == @application_name.to_s) %>
   listen 80 default_server;
