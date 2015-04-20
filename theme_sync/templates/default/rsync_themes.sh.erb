@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+# Sync themes to deploy box
+
+THEMES_PATH=<%= node[:theme_sync][:themes_path] %>
+REMOTE_PATH=<%= node[:theme_sync][:remote_path] %>
+
+inotifywait -mr --timefmt '%d/%m/%y %H:%M' --format '%T %w %f' -e close_write $THEMES_PATH | while read date time dir file; do
+
+  FILECHANGE=${dir}${file}
+  # convert absolute path to relative
+  FILECHANGEREL=`echo "$FILECHANGE" | sed 's_'$THEMES_PATH'/__'`
+  
+  # THEME=`ruby -e "puts '$FILECHANGE'.match(/admin\/files\/(\w*)\//)[1]"`
+  # echo "THEME: $THEME"
+
+  echo rsync --progress --relative -vrae 'ssh -p 22' $FILECHANGEREL deploy@ec2-54-155-47-215.eu-west-1.compute.amazonaws.com:$REMOTE_PATH && \
+  echo "At ${time} on ${date}, file $FILECHANGE was backed up via rsync"
+done
