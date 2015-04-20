@@ -15,7 +15,6 @@ template '/home/deploy/rsync_themes.sh' do
   source "rsync_themes.sh.erb"
   owner "deploy"
   mode "0777"
-  variables(:nodes => app_servers)
 end
 
 # EXECUTE BASH SCRIPT
