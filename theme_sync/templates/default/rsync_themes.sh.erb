@@ -20,7 +20,7 @@ inotifywait -mr --timefmt '%d/%m/%y %H:%M' --format '%T %w %f' -e close_write -e
   # THEME=`ruby -e "puts '$FILECHANGE'.match(/admin\/files\/(\w*)\//)[1]"`
   # echo "THEME: $THEME"
 
-  rsync -arvce "ssh -o StrictHostKeyChecking=no" $FILECHANGE deploy@46.137.112.6:$REMOTE_PATH && \
+  rsync -arvce "ssh -o StrictHostKeyChecking=no" $FILECHANGEREL deploy@46.137.112.6:$REMOTE_PATH && \
   # echo rsync --progress --relative -vrae 'ssh -p 22' $FILECHANGEREL deploy@ec2-54-155-47-215.eu-west-1.compute.amazonaws.com:$REMOTE_PATH && \
   echo "At ${time} on ${date}, file $FILECHANGE was backed up via rsync"
 done
