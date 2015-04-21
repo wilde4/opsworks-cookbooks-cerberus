@@ -21,4 +21,5 @@ end
 execute "execute rsync_themes.sh" do
   command "/home/deploy/rsync_themes.sh &"
   user "deploy"
+  action :run
 end
