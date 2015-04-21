@@ -9,18 +9,24 @@ exec 2>&1
 THEMES_PATH=<%= node[:theme_sync][:themes_path] %>
 REMOTE_PATH=<%= node[:theme_sync][:remote_path] %>
 
-inotifywait -mr --timefmt '%d/%m/%y %H:%M' --format '%T %w %f' -e close_write -e create -e delete -e move $THEMES_PATH | while read date time dir file; do
+inotifywait -mr --timefmt '%d/%m/%y %H:%M' --format '%T %w %f' --exclude '(.c9)' -e close_write -e create -e delete -e move $THEMES_PATH | while read date time dir file; do
 
   FILECHANGE=${dir}${file}
-  echo "FILECHANGE: $FILECHANGE"
+  # echo "FILECHANGE: $FILECHANGE"
   # convert absolute path to relative
   FILECHANGEREL=`echo "$FILECHANGE" | sed 's_'$THEMES_PATH'/__'`
-  echo "FILECHANGEREL: $FILECHANGEREL"
+  # echo "FILECHANGEREL: $FILECHANGEREL"
   
   # THEME=`ruby -e "puts '$FILECHANGE'.match(/admin\/files\/(\w*)\//)[1]"`
   # echo "THEME: $THEME"
+  REMOTE_DIR=$(dirname "${FILECHANGEREL}")
+  # echo "REMOTE_DIR: $REMOTE_DIR"
+  REMOTE_DIR_PATH="$REMOTE_PATH/$REMOTE_DIR"
+  echo "REMOTE_DIR_PATH: $REMOTE_DIR_PATH"
 
-  rsync -arvce "ssh -o StrictHostKeyChecking=no" $FILECHANGEREL deploy@46.137.112.6:$REMOTE_PATH && \
-  # echo rsync --progress --relative -vrae 'ssh -p 22' $FILECHANGEREL deploy@ec2-54-155-47-215.eu-west-1.compute.amazonaws.com:$REMOTE_PATH && \
+  ssh deploy@46.137.112.6 "mkdir -p $REMOTE_DIR_PATH && exit"
+
+  # echo rsync -arvce "ssh -o StrictHostKeyChecking=no" --delete $dir deploy@46.137.112.6:$REMOTE_DIR_PATH && \
+  rsync -arvce "ssh -o StrictHostKeyChecking=no" --delete $dir deploy@46.137.112.6:$REMOTE_DIR_PATH && \
   echo "At ${time} on ${date}, file $FILECHANGE was backed up via rsync"
 done

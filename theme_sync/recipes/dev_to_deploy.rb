@@ -18,7 +18,7 @@ template '/home/deploy/rsync_themes.sh' do
 end
 
 # EXECUTE BASH SCRIPT
-# execute "execute rsync_themes.sh" do
-#   command "/home/deploy/rsync_themes.sh"
-#   user "deploy"
-# end
+execute "execute rsync_themes.sh" do
+  command "/home/deploy/rsync_themes.sh &"
+  user "deploy"
+end
