@@ -2,14 +2,20 @@
 #
 # Sync themes to deploy box
 
+# LOGGING
+exec > >(tee /cloud9/logs/theme_push.log)
+exec 2>&1
+
 THEMES_PATH=<%= node[:theme_sync][:themes_path] %>
 REMOTE_PATH=<%= node[:theme_sync][:remote_path] %>
 
-inotifywait -mr --timefmt '%d/%m/%y %H:%M' --format '%T %w %f' -e close_write $THEMES_PATH | while read date time dir file; do
+inotifywait -mr --timefmt '%d/%m/%y %H:%M' --format '%T %w %f' -e close_write -e create -e delete -e move $THEMES_PATH | while read date time dir file; do
 
   FILECHANGE=${dir}${file}
+  echo "FILECHANGE: $FILECHANGE"
   # convert absolute path to relative
   FILECHANGEREL=`echo "$FILECHANGE" | sed 's_'$THEMES_PATH'/__'`
+  echo "FILECHANGEREL: $FILECHANGEREL"
   
   # THEME=`ruby -e "puts '$FILECHANGE'.match(/admin\/files\/(\w*)\//)[1]"`
   # echo "THEME: $THEME"
