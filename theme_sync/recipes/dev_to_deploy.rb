@@ -19,7 +19,7 @@ end
 
 # EXECUTE BASH SCRIPT
 execute "execute rsync_themes.sh" do
-  command "/home/deploy/rsync_themes.sh &"
+  command "nohup bash /home/deploy/rsync_themes.sh &"
   user "deploy"
   action :run
 end
