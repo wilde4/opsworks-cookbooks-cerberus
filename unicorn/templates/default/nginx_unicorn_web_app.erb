@@ -67,7 +67,6 @@ server {
       }
 
       location ~* \.(jpg|jpeg|png|gif|svg|ico|css|js)$ {
-        root <%= @application[:absolute_document_root] %>;
         expires 1y;
         add_header Cache-Control "public";
       }
