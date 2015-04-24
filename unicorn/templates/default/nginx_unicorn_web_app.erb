@@ -46,9 +46,10 @@ server {
         add_header Cache-Control "public";
       }
 
-      location ^~ \.(jpg|jpeg|png|gif|svg|ico|css|js)$ {
+      location ~* \.(jpg|jpeg|png|gif|svg|ico|css|js)$ {
         expires 1y;
         add_header Cache-Control "public";
+        break;
       }
     <% end %>
   <% end %>
