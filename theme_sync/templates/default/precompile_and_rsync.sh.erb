@@ -25,7 +25,8 @@ cp -Rf /cloud9/cloud9/$1 /cloud9/sync/themes/$2
 <% @nodes.each do |node| %>
 # Instance Type: <%= node.attributes.instance_type rescue nil %>
 <% if node.attributes.attribute?(:public_dns_name) && node.attributes.public_dns_name -%>
-rsync -arvce "ssh -o StrictHostKeyChecking=no" /cloud9/sync deploy@<%= node.attributes.public_dns_name %>:/srv/www/oliver/shared
+rsync -arvce "ssh -o StrictHostKeyChecking=no" /cloud9/sync/precompiled_assets/$2/$1 deploy@<%= node.attributes.public_dns_name %>:/srv/www/oliver/shared/sync/precompiled_assets/$2
+rsync -arvce "ssh -o StrictHostKeyChecking=no" /cloud9/sync/themes/$2/$1 deploy@<%= node.attributes.public_dns_name %>:/srv/www/oliver/shared/sync/themes/$2
 <% end -%>
 <% end -%>
 
