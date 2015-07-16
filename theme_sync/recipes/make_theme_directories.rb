@@ -1,5 +1,5 @@
 # PRODUCTION
-directory "#{ENV['HOME']}/shared/sync/precompiled_assets/production" do
+directory "/srv/www/oliver/shared/sync/precompiled_assets/production" do
   mode 0755
   owner 'deploy'
   group 'www-data'
@@ -7,7 +7,7 @@ directory "#{ENV['HOME']}/shared/sync/precompiled_assets/production" do
   action :create
 end
 
-directory "#{ENV['HOME']}/shared/sync/themes/production" do
+directory "/srv/www/oliver/shared/sync/themes/production" do
   mode 0755
   owner 'deploy'
   group 'www-data'
@@ -16,7 +16,7 @@ directory "#{ENV['HOME']}/shared/sync/themes/production" do
 end
 
 # STAGING
-directory "#{ENV['HOME']}/shared/sync/precompiled_assets/staging" do
+directory "/srv/www/oliver/shared/sync/precompiled_assets/staging" do
   mode 0755
   owner 'deploy'
   group 'www-data'
@@ -24,7 +24,7 @@ directory "#{ENV['HOME']}/shared/sync/precompiled_assets/staging" do
   action :create
 end
 
-directory "#{ENV['HOME']}/shared/sync/themes/staging" do
+directory "/srv/www/oliver/shared/sync/themes/staging" do
   mode 0755
   owner 'deploy'
   group 'www-data'
