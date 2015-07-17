@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: opsworks_clockwork
-# Recipe:: default
+# Recipe:: volcanic_deploy
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-opsworks_clockwork "oliver-clockwork" do
+opsworks_clockwork "volcanic-deploy-clockwork" do
   working_directory "/srv/www/volcanic_deploy/current"
   rails_env "production"
   user "deploy"
