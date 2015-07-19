@@ -17,7 +17,7 @@ node[:deploy].each do |application, deploy|
 
   if token && room && application_name && perform_notification && !scm.nil? then
     execute "send hipchat notification" do
-      command "/usr/bin/hipchat_notification.py #{token} #{room} #{application_name} #{opsworks_user}"
+      command "/usr/bin/hipchat_notification.py #{token} #{room} #{application_name} #{node[:opsworks][:stack][:name]} #{opsworks_user}"
       action :run
     end
   end
