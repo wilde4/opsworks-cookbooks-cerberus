@@ -66,7 +66,7 @@ action :create do
 
   template "#{node.default["monit"]["conf_dir"]}/clockwork_#{name}.monitrc" do
     source 'clockwork.monitrc.erb'
-    cookbook 'map_app_clockwork'
+    cookbook 'mat_app_clockwork'
     owner 'root'
     group 'root'
     mode '0644'
