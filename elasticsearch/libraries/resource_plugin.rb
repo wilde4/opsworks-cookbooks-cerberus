@@ -3,7 +3,7 @@ class Chef
   # Chef Resource for installing an elasticsearch plugin
   class Resource::ElasticsearchPlugin < Chef::Resource::LWRPBase
     include ElasticsearchCookbook::Helpers
-    resource_name :elasticsearch_plugin if respond_to?(:resource_name)
+    # resource_name :elasticsearch_plugin if respond_to?(:resource_name)
     actions(:install, :remove)
     default_action :install
 

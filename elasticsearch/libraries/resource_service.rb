@@ -2,7 +2,7 @@
 class Chef
   # Chef Resource for declaring a service for Elasticsearch
   class Resource::ElasticsearchService < Chef::Resource::LWRPBase
-    resource_name :elasticsearch_service if respond_to?(:resource_name)
+    # resource_name :elasticsearch_service if respond_to?(:resource_name)
     actions(:configure, :remove)
     default_action :configure
 
