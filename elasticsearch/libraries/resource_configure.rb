@@ -3,7 +3,7 @@ class Chef
   # Chef Resource for configuring an Elasticsearch node
   #
   class Resource::ElasticsearchConfigure < Chef::Resource::LWRPBase
-    resource_name :elasticsearch_configure if respond_to?(:resource_name)
+    # resource_name :elasticsearch_configure if respond_to?(:resource_name)
 
     actions(:manage, :remove)
     default_action :manage
