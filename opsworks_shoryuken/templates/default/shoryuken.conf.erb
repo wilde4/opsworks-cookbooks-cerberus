@@ -29,6 +29,8 @@ normal exit 0 TERM USR1
 
 chdir "<%= @release_path %>"
 
+env RAILS_ENV=production
+
 <% @env.each do |k,v| %>
 env <%= k %>=<%= (v || '').to_s.gsub('"', '\\"') %>
 <% end %>
