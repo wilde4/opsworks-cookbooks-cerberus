@@ -91,7 +91,7 @@ server {
   listen 443;
   server_name _ *;
 
-  ssl_certificate /etc/nginx/ssl/public.pem;
+  ssl_certificate /etc/nginx/ssl/oliver.public.pem;
   ssl_certificate_key /etc/nginx/ssl/oliver.key;
 
   return 301 https://www.$host$request_uri;
