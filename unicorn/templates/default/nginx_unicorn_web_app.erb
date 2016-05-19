@@ -87,6 +87,11 @@ server {
   }
 }
 
+server {
+  listen         443;
+  return         301 https://www.$host$request_uri;
+}
+
 <% if @application[:ssl_support] %>
 server {
   listen   443;
