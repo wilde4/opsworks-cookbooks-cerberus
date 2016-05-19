@@ -88,8 +88,13 @@ server {
 }
 
 server {
-  listen         443;
-  return         301 https://www.$host$request_uri;
+  listen 443;
+  server_name _ *;
+
+  ssl_certificate /etc/nginx/ssl/public.pem;
+  ssl_certificate_key /etc/nginx/ssl/oliver.key;
+
+  return 301 https://www.$host$request_uri;
 }
 
 <% if @application[:ssl_support] %>
