@@ -8,8 +8,8 @@ node[:deploy].each do |app_name, deploy_config|
   worker_count = deploy_config[:resque][:workers]
 
   puts "Loading #{worker_count} workers"
-  
-  worker_count.times do
+
+  worker_count.to_i.times do
     execute "rake resque:work" do
       command       "bundle exec rake environment resque:work"
       cwd           app_root
