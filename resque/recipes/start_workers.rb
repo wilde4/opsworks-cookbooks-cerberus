@@ -15,7 +15,8 @@ node[:deploy].each do |app_name, deploy_config|
       cwd           app_root
       environment({
         'RAILS_ENV'  => app_env,
-        'TERM_CHILD' => "1"
+        'TERM_CHILD' => "1",
+        'QUEUE'      => "*"
       })
     end
   end
