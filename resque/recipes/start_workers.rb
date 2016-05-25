@@ -13,6 +13,7 @@ node[:deploy].each do |app_name, deploy_config|
     execute "rake resque:work" do
       command       "bundle exec rake environment resque:work &"
       cwd           app_root
+      user          "deploy"
       environment({
         'RAILS_ENV'  => app_env,
         'TERM_CHILD' => "1",
