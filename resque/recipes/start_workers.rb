@@ -11,7 +11,7 @@ node[:deploy].each do |app_name, deploy_config|
 
   worker_count.to_i.times do
     execute "rake resque:work" do
-      command       "bundle exec rake environment resque:work"
+      command       "bundle exec rake environment resque:work &"
       cwd           app_root
       environment({
         'RAILS_ENV'  => app_env,
