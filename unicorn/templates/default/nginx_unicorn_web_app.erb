@@ -87,13 +87,13 @@ server {
   }
 }
 
-<% if @application[:absolute_document_root] == '/srv/www/oliver/current/public/' %>
+<% if @application[:absolute_document_root] == '/srv/www/oliver/current/public/' && ::File.exists?("/srv/www/ssl/oliver.public.pem") %>
   server {
     listen 443 ssl;
-
+  
     ssl_certificate /srv/www/ssl/oliver.public.pem;
     ssl_certificate_key /srv/www/ssl/oliver.key;
-
+  
     return 301 https://www.$host$request_uri;
   }
 <% end %>
