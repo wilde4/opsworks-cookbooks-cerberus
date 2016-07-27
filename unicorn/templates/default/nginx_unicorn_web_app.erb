@@ -38,12 +38,7 @@ server {
 
   <% if @application[:absolute_document_root] == '/srv/www/oliver/current/public/' %>
     <% if @application[:rails_env] == 'remote_development' %>
-      # ONLY CACHE ASSETS
-      location ~* /assets/.*.(css|js)$ {
-        expires 1y;
-        add_header Cache-Control "public";
-        break;
-      }
+      # DON'T CACHE ALL THE THINGS
     <% else %>
       location ~* \.(?:eot|ttf|woff)$ {
         add_header Access-Control-Allow-Origin *;
