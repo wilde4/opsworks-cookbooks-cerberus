@@ -4,6 +4,7 @@ default['tmpreaper']['protect_extra'] = ''
 default['tmpreaper']['dirs'] = '/tmp/.'
 default['tmpreaper']['delay'] = '256'
 default['tmpreaper']['additional_options'] = ''
+default['tmpreaper']['tmptime'] = '1d'
 
 # cron
 default['tmpreaper']['cron']['hour'] = 2
