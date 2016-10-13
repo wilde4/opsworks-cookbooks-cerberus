@@ -33,5 +33,5 @@ end
 execute "create symlink to themes" do
   command "ln -s /srv/www/themes/ /srv/www/oliver/shared/themes"
   user "deploy"
-  not_if do ::File.exists?('/srv/www/oliver/shared/themes/eventbeat/layout/theme.liquid') end
+  not_if do ::Dir.exists?('/srv/www/oliver/shared/themes') end
 end
