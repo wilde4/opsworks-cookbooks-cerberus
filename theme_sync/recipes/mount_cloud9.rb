@@ -25,7 +25,9 @@ execute "mount cloud9 to themes" do
   Chef::Log.info("********** The private IP address for NFS is: '#{node[:opsworks][:layers][:nfs][:instances].select{|k,v| v[:status] == "online"}.values.first[:private_ip]}' **********")
   command "sudo mount #{node[:opsworks][:layers][:nfs][:instances].select{|k,v| v[:status] == "online"}.values.first[:private_ip]}:/cloud9/cloud9 /srv/www/themes"
   user "root"
-  not_if do ::File.exists?('/srv/www/oliver/shared/themes/eventbeat/layout/theme.liquid') end
+  # not_if do ::File.exists?('/srv/www/oliver/shared/themes/test.txt') end
+  Chef::Log.info("********** is mounted?:  #{system('mountpoint -q /srv/www/themes')}")
+  not_if do system('mountpoint -q /srv/www/themes') end
 end
 
 execute "create symlink to themes" do
