@@ -22,8 +22,8 @@ execute "mount cloud9 to themes" do
   Chef::Log.info("********** NFS Instances:  #{node[:opsworks][:layers][:nfs][:instances]}")
 
   # Find the first instance int he NFS layer that is currently online
-  Chef::Log.info("********** The private IP address for NFS is: '#{node[:opsworks][:layers][:nfs][:instances].select{|x| x[:status] == "online"}.first[:private_ip]}' **********")
-  command "sudo mount #{node[:opsworks][:layers][:nfs][:instances].select{|x| x[:status] == "online"}.first[:private_ip]}:/cloud9/cloud9 /srv/www/themes"
+  Chef::Log.info("********** The private IP address for NFS is: '#{node[:opsworks][:layers][:nfs][:instances].select{|k,v| v[:status] == "online"}.values.first[:private_ip]}' **********")
+  command "sudo mount #{node[:opsworks][:layers][:nfs][:instances].select{|k,v| v[:status] == "online"}.values.first[:private_ip]}:/cloud9/cloud9 /srv/www/themes"
   user "root"
   not_if do ::File.exists?('/srv/www/oliver/shared/themes/eventbeat/layout/theme.liquid') end
 end
