@@ -65,3 +65,19 @@ directory "/srv/www/volcanic_deploy/shared/system/logs/production" do
   recursive true
   action :create
 end
+
+directory "/deploy_themes/precompiled_assets" do
+  mode 0755
+  owner 'deploy'
+  group 'www-data'
+  recursive true
+  action :create
+end
+
+directory "/deploy_themes/themes" do
+  mode 0755
+  owner 'deploy'
+  group 'www-data'
+  recursive true
+  action :create
+end
