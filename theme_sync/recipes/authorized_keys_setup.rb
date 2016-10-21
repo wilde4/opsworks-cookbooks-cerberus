@@ -4,7 +4,7 @@
 execute "create deploy/authorized_keys file" do
   command "mkdir /home/deploy/.ssh"
   user "deploy"
-  not_if do ::File.exists?('/home/deploy/.ssh/authorized_keys') end
+  not_if do ::File.directory?('/home/deploy/.ssh') end
 end
 
 template '/home/deploy/.ssh/authorized_keys' do
