@@ -66,7 +66,7 @@ directory "/srv/www/volcanic_deploy/shared/system/logs/production" do
   action :create
 end
 
-directory "/deploy_themes/precompiled_assets" do
+directory "/deploy_themes/precompiled_assets/staging" do
   mode 0755
   owner 'deploy'
   group 'www-data'
@@ -74,7 +74,23 @@ directory "/deploy_themes/precompiled_assets" do
   action :create
 end
 
-directory "/deploy_themes/themes" do
+directory "/deploy_themes/themes/staging" do
+  mode 0755
+  owner 'deploy'
+  group 'www-data'
+  recursive true
+  action :create
+end
+
+directory "/deploy_themes/precompiled_assets/production" do
+  mode 0755
+  owner 'deploy'
+  group 'www-data'
+  recursive true
+  action :create
+end
+
+directory "/deploy_themes/themes/production" do
   mode 0755
   owner 'deploy'
   group 'www-data'
