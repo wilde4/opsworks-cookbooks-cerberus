@@ -19,7 +19,7 @@
 #
 
 # package "nginx"
-package("nginx") do
+package "nginx" do
   action :install
   retries 0
   retry_delay 2
