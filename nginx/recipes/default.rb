@@ -18,10 +18,7 @@
 # limitations under the License.
 #
 
-# package "nginx"
-package "nginx" do
-  version "1.4.6-1ubuntu3.6"
-end
+package "nginx"
 
 directory node[:nginx][:dir] do
   owner 'root'
