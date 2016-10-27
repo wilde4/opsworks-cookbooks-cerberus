@@ -20,13 +20,7 @@
 
 # package "nginx"
 package "nginx" do
-  action :install
-  retries 0
-  retry_delay 2
-  package_name "nginx"
   version "1.4.6-1ubuntu3.6"
-  cookbook_name "nginx"
-  recipe_name "default"
 end
 
 directory node[:nginx][:dir] do
