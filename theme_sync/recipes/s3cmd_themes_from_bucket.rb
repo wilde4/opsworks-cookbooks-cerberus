@@ -7,8 +7,14 @@ execute "trigger s3cmd sync ofassets" do
   # not_if do ::File.exists?("/srv/www/oliver/shared/sync/themes/production/#{node[:theme_sync][:theme_to_test_for]}/layout/theme.liquid") end
 end
 
-execute "trigger s3cmd sync of themes" do
-  command "s3cmd sync --recursive --config=/home/deploy/.s3cfg s3://#{node[:theme_sync][:theme_bucket_name]}/themes/ /srv/www/oliver/shared/sync/themes/"
+execute "trigger s3cmd sync of production themes" do
+  command "s3cmd sync --recursive --config=/home/deploy/.s3cfg s3://#{node[:theme_sync][:theme_bucket_name]}/themes/production/ /srv/www/oliver/shared/sync/themes/production/"
+  user "deploy"
+  # not_if do ::File.exists?("/srv/www/oliver/shared/sync/themes/production/#{node[:theme_sync][:theme_to_test_for]}/layout/theme.liquid") end
+end
+
+execute "trigger s3cmd sync of staging themes" do
+  command "s3cmd sync --recursive --config=/home/deploy/.s3cfg s3://#{node[:theme_sync][:theme_bucket_name]}/themes/staging/ /srv/www/oliver/shared/sync/themes/staging/"
   user "deploy"
   # not_if do ::File.exists?("/srv/www/oliver/shared/sync/themes/production/#{node[:theme_sync][:theme_to_test_for]}/layout/theme.liquid") end
 end
