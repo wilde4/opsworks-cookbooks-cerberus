@@ -46,6 +46,11 @@ http {
     default $http_x_forwarded_proto;
   }
 
+  map $forwarded_proto $forwarded_port {
+    "https" "443";
+    default "80";
+  }
+
   include <%= node[:nginx][:dir] %>/conf.d/*.conf;
   include <%= node[:nginx][:dir] %>/sites-enabled/*;
   
