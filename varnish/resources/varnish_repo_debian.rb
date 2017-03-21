@@ -11,8 +11,4 @@ provides :varnish_repo, platform_family: 'debian'
 #   action :add
 # end
 
-package 'varnish' do
-  # package_name 'varnish-4.1'
-  version '4.1'
-  action :install
-end
+
