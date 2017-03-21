@@ -1,0 +1,37 @@
+import directors;
+import saintmode;
+
+<% server_count = search(:node, "layers:public").size %>
+<% search(:node, "layers:public").each_with_index do |node, index| %>
+backend server<%= index + 1 %> {
+  .host = "<%= node[:private_ip] %>";
+  .port = "80";
+  .probe = {
+    .url = "/health";
+    .timeout = 1s;
+    .interval = 10s;
+    .window = 5;
+    .threshold = 3;
+  }
+}
+
+<% end %>
+
+sub vcl_init {
+    # set up each server for saintmode
+    <% [1..server_count].each do |x| %>
+    new sm1 = saintmode.saintmode(server<%= x %>, 10);
+    <% end %>
+    # add saintmoded backends to round_robin director
+    new brr = directors.round_robin();
+
+    <% [1..server_count].each do |x| %>
+    brr.add_backend(sm<%= x %>.backend());
+    <% end %>
+}
+
+
+acl purgers {
+    "127.0.0.1";
+    "86.155.199.228";
+}
