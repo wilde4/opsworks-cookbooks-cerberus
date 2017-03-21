@@ -2,8 +2,7 @@ provides :varnish_repo, platform_family: 'debian'
 
 # default_action :configure
 
-
-apt_repository "varnish-cache_#{new_resource.major_version}" do
+apt_repository 'varnish-cache_4.1' do
   uri "http://repo.varnish-cache.org/#{node['platform']}"
   distribution node['lsb']['codename']
   components ['varnish-4.1']
@@ -11,4 +10,3 @@ apt_repository "varnish-cache_#{new_resource.major_version}" do
   deb_src true
   action :add
 end
-
