@@ -8,7 +8,7 @@ backend server<%= index + 1 %> {
   .port = "80";
   .probe = {
     .url = "/health";
-    .timeout = 1s;
+    .timeout = 2s;
     .interval = 10s;
     .window = 5;
     .threshold = 3;
@@ -19,13 +19,13 @@ backend server<%= index + 1 %> {
 
 sub vcl_init {
     # set up each server for saintmode
-    <% [1..server_count].each do |x| %>
+    <% [*1..server_count].each do |x| %>
     new sm1 = saintmode.saintmode(server<%= x %>, 10);
     <% end %>
     # add saintmoded backends to round_robin director
     new brr = directors.round_robin();
 
-    <% [1..server_count].each do |x| %>
+    <% [*1..server_count].each do |x| %>
     brr.add_backend(sm<%= x %>.backend());
     <% end %>
 }
