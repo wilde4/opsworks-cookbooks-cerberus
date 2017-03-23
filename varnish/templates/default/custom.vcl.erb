@@ -35,6 +35,12 @@ sub vcl_recv {
     }
 }
 
+sub vcl_hash {
+    if (req.http.CloudFront-Forwarded-Proto){
+        hash_data(req.http.CloudFront-Forwarded-Proto)
+    }
+}
+
 sub vcl_hit {
     set req.http.X-Varnish-Cache = "hit";
 }
@@ -109,6 +115,7 @@ sub vcl_deliver {
     set resp.http.X-Varnish-Cache = req.http.X-Varnish-Cache;
     set resp.http.X-Varnish-Url = req.http.X-Varnish-Url;
     set resp.http.Cache-Control = "private, no-cache";
+    set resp.http.X-CF-Passed-Proto = req.http.CloudFront-Forwarded-Proto;
     unset resp.http.X-Powered-By;
     unset resp.http.Server;
 }
