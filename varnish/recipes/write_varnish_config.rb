@@ -3,7 +3,7 @@ template "/etc/varnish/backends.vcl" do
   owner 'root'
   # group 
   source "backends.vcl.erb"
-  # variables(:deploy => deploy, :application => application)
+  variables(:servers => search(:node, "layers:public"))
 end
 
 template "/etc/varnish/custom.vcl" do
