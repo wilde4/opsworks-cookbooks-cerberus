@@ -1,8 +1,8 @@
 import directors;
 import saintmode;
 
-<% server_count = servers.size %>
-<% servers.each_with_index do |node, index| %>
+<% server_count = @servers.size %>
+<% @servers.each_with_index do |node, index| %>
 backend server<%= index + 1 %> {
   .host = "<%= node[:private_ip] %>";
   .port = "80";
