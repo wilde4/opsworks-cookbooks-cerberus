@@ -7,6 +7,8 @@ sub vcl_recv {
     # store requested url for returning later
     set req.http.X-Varnish-Url = req.url;
 
+    set req.http.X-Forwarded-Proto = req.http.CloudFront-Forwarded-Proto
+
     if (req.method == "BAN") {
         # limit who can purge the cache
         if (!client.ip ~ purgers) {
@@ -36,9 +38,7 @@ sub vcl_recv {
 }
 
 sub vcl_hash {
-    if (req.http.CloudFront-Forwarded-Proto){
-        hash_data(req.http.CloudFront-Forwarded-Proto)
-    }
+    hash_data(req.http.CloudFront-Forwarded-Proto);
 }
 
 sub vcl_hit {
