@@ -61,7 +61,7 @@ sub vcl_backend_response {
        return (retry);
     }
 
-    if (beresp.http.X-Do-Not-Cache == "true") {
+    if (beresp.http.X-Do-Not-Cache == "true" || beresp.url ~ "^\/users\/auth\/[a-z]*\/callback") {
         set beresp.uncacheable = true;
     } else {
         unset beresp.http.Set-Cookie;
