@@ -7,7 +7,7 @@ sub vcl_recv {
     # store requested url for returning later
     set req.http.X-Varnish-Url = req.url;
 
-    set req.http.X-Forwarded-Proto = req.http.CloudFront-Forwarded-Proto
+    set req.http.X-Forwarded-Proto = req.http.CloudFront-Forwarded-Proto;
 
     if (req.method == "BAN") {
         # limit who can purge the cache
