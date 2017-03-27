@@ -26,7 +26,7 @@ sub vcl_recv {
     }
 
     # decide if request can look in cache
-    if (req.url ~ "^\/(admin|users|recruiter|dashboard|consultant(?!s)|job-search|api)"){
+    if (req.url ~ "^\/(admin|users|recruiter|dashboard|consultant(?!s)|job-search|api|sa\/|super_admins)"){
         return(pass);
     } elsif (req.http.Cookie ~ "_user_logged_in") {
         return(pass);
@@ -61,7 +61,7 @@ sub vcl_backend_response {
        return (retry);
     }
 
-    if (beresp.http.X-Do-Not-Cache == "true" || bereq.url ~ "^\/users\/auth\/[a-z]*\/callback") {
+    if (beresp.http.X-Do-Not-Cache == "true" || bereq.url ~ "^\/users\/auth\/[a-z_-]*\/callback") {
         set beresp.uncacheable = true;
     } else {
         unset beresp.http.Set-Cookie;
