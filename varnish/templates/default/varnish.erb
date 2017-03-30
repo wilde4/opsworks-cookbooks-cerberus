@@ -22,4 +22,4 @@ DAEMON_OPTS="-a :80 \
              -T localhost:6082 \
              -f /etc/varnish/default.vcl \
              -S /etc/varnish/secret \
-             -s file,/tmp/cache-file,1G"
+             -s file,/tmp/cache-file,<%= node[:varnish][:cache_file_size] %>"

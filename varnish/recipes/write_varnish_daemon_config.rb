@@ -1,6 +1,6 @@
 template "/etc/default/varnish" do
   mode '0755'
-  owner root
+  owner 'root'
   # group deploy[:group]
   source "varnish.erb"
   # variables(:deploy => deploy, :application => application)

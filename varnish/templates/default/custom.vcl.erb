@@ -12,7 +12,7 @@ sub vcl_recv {
     if (req.method == "BAN") {
         # limit who can purge the cache
         if (!client.ip ~ purgers) {
-            return (synth(405, "Purging not allowed for " + client.ip));
+        #     return (synth(405, "Purging not allowed for " + client.ip));
         }
         ban("req.http.host == " + req.http.host);
         
