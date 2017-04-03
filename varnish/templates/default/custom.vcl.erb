@@ -26,7 +26,7 @@ sub vcl_recv {
     }
 
     # decide if request can look in cache
-    if (req.url ~ "^\/(admin|users|recruiter|dashboard|consultant(?!s)|job-search|api|sa\/|super_admins)"){
+    if (req.url ~ "^\/(admin|users|recruiter|dashboard|consultant(?!s)|job-search|api|sa\/|super_admins)" || req.url ~ ".*\/job.*apply\/?$"){
         return(pass);
     } elsif (req.http.Cookie ~ "_user_logged_in") {
         return(pass);
