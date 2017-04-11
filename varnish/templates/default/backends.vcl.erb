@@ -6,6 +6,9 @@ import saintmode;
 backend server<%= index + 1 %> {
   .host = "<%= node[:private_ip] %>";
   .port = "80";
+  .connect_timeout = 2s; # Wait a maximum of 1s for backend connection
+  .first_byte_timeout = 5s; # Wait a maximum of 5s for the first byte to come from your backend
+  .between_bytes_timeout = 2s; # Wait a maximum of 2s between each bytes sent
   .probe = {
     .url = "/health";
     .timeout = 2s;
