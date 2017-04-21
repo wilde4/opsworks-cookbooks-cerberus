@@ -40,7 +40,7 @@ server {
     <% if @application[:rails_env] == 'remote_development' %>
       # DON'T CACHE ALL THE THINGS
     <% else %>
-      location ~* \.(?:eot|ttf|woff)$ {
+      location ~* \.(?:eot|ttf|woff|woff2)$ {
         add_header Access-Control-Allow-Origin *;
         expires 1y;
         add_header Cache-Control "public";
