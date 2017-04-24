@@ -26,6 +26,6 @@ template "/etc/varnish/error_page.vcl" do
   mode '0755'
   owner 'root'
   # group deploy[:group]
-  source "default.vcl.erb"
+  source "error_page.vcl.erb"
   # variables(:deploy => deploy, :application => application)
 end
