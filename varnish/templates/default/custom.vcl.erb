@@ -58,17 +58,18 @@ sub vcl_backend_fetch {
     if (bereq.retries > 0) {
         set bereq.backend = brr.backend();
     }
+    # set beresp.http.X-Backend = beresp.backend.name;
 }
 
 sub vcl_backend_response {
 
-    if (beresp.status > 500) {
+    if (beresp.status >= 500) {
        # the failing backend is blacklisted and we try to fetch content from another server
        saintmode.blacklist(5s);
        return (retry);
     }
 
-    if (beresp.http.X-Do-Not-Cache == "true" || bereq.url ~ "^\/users\/auth\/[a-z_-]*\/callback" || bereq.http.X-Varnish-Cache == "pass") {
+    if (beresp.http.X-Do-Not-Cache == "true" || bereq.url ~ "^\/users\/auth\/[a-z_-]*\/callback" || bereq.http.X-Varnish-Cache == "pass" || beresp.http.Content-Type ~ "json") {
         set beresp.uncacheable = true;
     } else {
         unset beresp.http.Set-Cookie;
