@@ -9,6 +9,7 @@ execute "create cloud9 folder" do
   Chef::Log.info("********** Creating Clou9 folder **********")
   command "mkdir /cloud9/cloud9"
   user "root"
+  not_if do ::Dir.exists?('/cloud9/cloud9') end
 end
 
 execute "start nfs service" do
