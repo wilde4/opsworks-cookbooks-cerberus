@@ -116,10 +116,16 @@ sub vcl_backend_response {
     if (beresp.http.content-type ~ "text") {
         set beresp.do_gzip = true;
     }
+
+    set beresp.http.X-Varnish-Retries = bereq.retries;
     
 }
 
 sub vcl_backend_error {
+    if (bereq.retries < max_retries){
+        return (retry);
+    }
+
     include "error_page.vcl";
     return (deliver);
 }
