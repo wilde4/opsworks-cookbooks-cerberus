@@ -44,6 +44,25 @@ sub vcl_hash {
 
 sub vcl_hit {
     set req.http.X-Varnish-Cache = "hit";
+
+    if (obj.ttl >= 0s) {
+        # A pure unadulterated hit, deliver it
+        return (deliver);
+    }
+
+    # deliver for bots regardless of age
+    if (req.http.User-Agent ~ "googlebot") {
+        return (deliver);
+    }
+
+
+    if (obj.ttl + obj.grace > 0s) {
+        # Object is in grace, deliver it
+        # Automatically triggers a background fetch
+        return (deliver);
+    }
+    # fetch & deliver once we get the result
+    return (fetch);
 }
 
 sub vcl_miss {
@@ -122,7 +141,7 @@ sub vcl_backend_response {
 }
 
 sub vcl_backend_error {
-    if (bereq.retries < max_retries){
+    if (bereq.retries < 4){
         return (retry);
     }
 
