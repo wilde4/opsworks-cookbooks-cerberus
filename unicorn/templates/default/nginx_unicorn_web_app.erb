@@ -46,7 +46,7 @@ server {
         add_header Cache-Control "public";
       }
 
-      location ~* /(production|staging|assets|javascripts|chosen)/.*.(jpg|jpeg|png|gif|svg|ico|css|js)$ {
+      location ~* \/(production|staging|assets|javascripts|chosen)\/.*.(jpg|jpeg|png|gif|svg|ico|css|js)$ {
         expires 1y;
         add_header Access-Control-Allow-Origin *;
         add_header Cache-Control "public";
