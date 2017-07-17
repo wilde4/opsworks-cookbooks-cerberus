@@ -88,7 +88,7 @@ sub vcl_backend_response {
        return (retry);
     }
 
-    if (beresp.http.X-Do-Not-Cache == "true" || bereq.url ~ "^\/users\/auth\/[a-z_-]*\/callback" || bereq.http.X-Varnish-Cache == "pass" || beresp.http.Content-Type ~ "json") {
+    if (beresp.http.X-Do-Not-Cache == "true" || bereq.url ~ "^\/users\/auth\/[a-z_-]*\/callback" || bereq.http.X-Varnish-Cache == "pass" || beresp.http.Content-Type ~ "json" || beresp.http.Content-Type ~ "xml") {
         set beresp.uncacheable = true;
     } else {
         unset beresp.http.Set-Cookie;
