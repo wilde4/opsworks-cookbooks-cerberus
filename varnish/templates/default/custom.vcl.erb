@@ -57,7 +57,7 @@ sub vcl_hit {
     # deliver for bots regardless of age
     if (req.http.User-Agent ~ "bot" || req.http.User-Agent ~ "Googlebot" || req.http.User-Agent ~ "bingbot") {
         if (obj.ttl <= 0s){
-            obj.ttl = 10s;
+            set obj.ttl = 10s;
         }
         return (deliver);
     }
