@@ -56,9 +56,6 @@ sub vcl_hit {
 
     # deliver for bots regardless of age
     if (req.http.User-Agent ~ "bot" || req.http.User-Agent ~ "Googlebot" || req.http.User-Agent ~ "bingbot") {
-        if (obj.ttl <= 0s){
-            set obj.ttl = 10s;
-        }
         return (deliver);
     }
 
@@ -101,7 +98,7 @@ sub vcl_backend_response {
         unset beresp.http.Set-Cookie;
         unset beresp.http.Cookie;
         set beresp.http.Cache-Control = "public";
-        set beresp.ttl = 3600s; # 1h in cache 
+        set beresp.ttl = 7200s; # 1h in cache 
         set beresp.grace = 864000s; # 10 days grace period
     }
     
