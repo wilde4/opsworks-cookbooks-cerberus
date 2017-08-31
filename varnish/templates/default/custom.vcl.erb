@@ -27,6 +27,10 @@ sub vcl_recv {
 
     # decide if request can look in cache
     # bit at the beginning permits locales
+    # if ((req.url ~ "job-search") && (req.http.User-Agent ~ "bot" || req.http.User-Agent ~ "Googlebot" || req.http.User-Agent ~ "bingbot"))
+    #     set req.backend_hint = search_brr.backend();
+    #     return(pass)
+    # } els
     if (req.url ~ "^\/([a-zA-Z\-]{0,5}\/)?(admin|users|recruiter|dashboard|consultant(?!s)|job-search|api|sa\/|super_admins)" || req.url ~ ".*\/job.*apply\/?" || req.url ~ ".*\/job.*save_job\/?" || req.url ~ ".*\/job.*unsave_job\/?"){
         return(pass);
     } elsif (req.http.Cookie ~ "_user_logged_in") {
@@ -52,7 +56,7 @@ sub vcl_hit {
 
     # deliver for bots regardless of age
     if (req.http.User-Agent ~ "bot" || req.http.User-Agent ~ "Googlebot" || req.http.User-Agent ~ "bingbot") {
-        return (deliver);
+        return (deliver_stale);
     }
 
 
