@@ -78,9 +78,9 @@ sub vcl_pass {
 }
 
 sub vcl_backend_fetch {
-    if (bereq.retries > 0) {
-        set bereq.backend = brr.backend();
-    }
+    # if (bereq.retries > 0) {
+    #     set bereq.backend = brr.backend();
+    # }
     # set beresp.http.X-Backend = beresp.backend.name;
 }
 
