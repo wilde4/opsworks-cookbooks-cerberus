@@ -2,7 +2,11 @@
 
 sub vcl_recv {
     # send all requests to our backend round-robin (brr)
-    set req.backend_hint = brr.backend();
+    if (req.http.host == "www.twentyrecruitment.com" || req.http.host == "www.barkerross.co.uk" || req.http.host == "www.careersincybersecurity.co.uk" || req.http.host == "www.montash.com" || req.http.host == "www.identifiautotech.com" || req.http.host == "www.lawrenceharvey.com" || req.http.host == "www.darwinrecruitment.com" || req.http.host == "www.jobcoconut.com" || req.http.host == "www.macgregorblack.com" || req.http.host == "careers.autorestore.co.uk" || req.http.host == "www.cmcconsulting.co.uk" || req.http.host == "www.huntercharles.de" || req.http.host == "www.hshcr.com" || req.http.host == "www.montashreviews.com" || req.http.host == "www.hero.ie" || req.http.host == "www.hrdigitaltoday.com" || req.http.host == "www.4healthcare.co.uk" || req.http.host == "www.propelexecutive.com" || req.http.host == "www.astutetechnical.co.uk" || req.http.host == "www.careertrotter.de" || req.http.host == "www.meridianbs.co.uk" || req.http.host == "www.achievegroup.com.my" || req.http.host == "www.achievegroup.com.hk" || req.http.host == "www.achievegroup.asia" || req.http.host == "www.sammons.co.uk" || req.http.host == "www.venquis.de" || req.http.host == "www.channelpeople.co.uk" || req.http.host == "www.fleximums.com" || req.http.host == "www.talentfm.co.uk" || req.http.host == "www.monarchdigital.co.uk" || req.http.host == "www.therecruitmentsolution.co.uk" || req.http.host == "www.nativegravity.co.uk" || req.http.host == "www.lawrenceharvey.com"){
+        set req.backend_hint = brr.backend();
+    } else {
+        set req.backend_hint = hp_brr.backend();
+    }
 
     # store requested url for returning later
     set req.http.X-Varnish-Url = req.url;
@@ -10,12 +14,7 @@ sub vcl_recv {
     set req.http.X-Forwarded-Proto = req.http.CloudFront-Forwarded-Proto;
 
     if (req.method == "BAN") {
-        # limit who can purge the cache
-        if (!client.ip ~ purgers) {
-        #     return (synth(405, "Purging not allowed for " + client.ip));
-        }
         ban("req.http.host == " + req.http.host);
-        
         # Throw a synthetic page so the request won't go to the backend.
         return(synth(200, "Ban added"));
     }
@@ -28,7 +27,7 @@ sub vcl_recv {
     # decide if request can look in cache
     # bit at the beginning permits locales
     if ((req.url ~ "job-search" || req.url ~ "job") && (req.http.User-Agent ~ "bot" || req.http.User-Agent ~ "Googlebot" || req.http.User-Agent ~ "bingbot" || req.http.User-Agent ~ "spider")) {
-        set req.backend_hint = search_brr.backend();
+        # set req.backend_hint = search_brr.backend();
         unset req.http.Cookie;
         return(hash);
     } elsif (req.url ~ "^\/([a-zA-Z\-]{0,5}\/)?(admin|users|recruiter|dashboard|consultant(?!s)|job-search|api|sa\/|super_admins)" || req.url ~ ".*\/job.*apply\/?" || req.url ~ ".*\/job.*save_job\/?" || req.url ~ ".*\/job.*unsave_job\/?"){
