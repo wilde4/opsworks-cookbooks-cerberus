@@ -60,7 +60,7 @@ sub vcl_init {
     # add saintmoded high performance backends to round_robin director
     new hp_brr = directors.round_robin();
 
-    <% [*1..server_count].each do |x| %>
+    <% [*1..hp_server_count].each do |x| %>
     hp_brr.add_backend(hp_sm<%= x %>.backend());
     <% end %>
 }
