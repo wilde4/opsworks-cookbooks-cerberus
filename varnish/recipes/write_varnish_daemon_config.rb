@@ -6,6 +6,6 @@ template "/etc/default/varnish" do
   # variables(:deploy => deploy, :application => application)
 end
 
-service "varnish" do
-  action :restart
-end
+# service "varnish" do
+#   action :restart
+# end
