@@ -32,7 +32,7 @@ sub vcl_recv {
         # set req.backend_hint = search_brr.backend();
         unset req.http.Cookie;
         return(hash);
-    } elsif (req.url ~ "^\/([a-zA-Z\-]{0,5}\/)?(admin|users|recruiter|dashboard|consultant(?!s)|job-search|api|sa\/|super_admins)" || req.url ~ ".*\/job.*apply\/?" || req.url ~ ".*\/job.*save_job\/?" || req.url ~ ".*\/job.*unsave_job\/?"){
+    } elsif (req.url ~ "^\/([a-zA-Z\-]{0,5}\/)?(admin|users|recruiter|dashboard|consultant(?!s)|job-search|api|sa\/|super_admins)" || req.url ~ ".*\/job.*apply\/?" || req.url ~ ".*\/job.*save_job\/?" || req.url ~ ".*\/job.*unsave_job\/?" || req.url ~ ".*\/job.*application-completed\/?"){
         return(pass);
     } elsif (req.http.Cookie ~ "_user_logged_in") {
         return(pass);
