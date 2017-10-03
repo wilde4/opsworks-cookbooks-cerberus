@@ -10,7 +10,7 @@ template "/etc/varnish/custom.vcl" do
   mode '0755'
   owner 'root'
   # group deploy[:group]
-  source "custom.vcl.erb"
+  source "custom_cerberus.vcl.erb"
   # variables(:deploy => deploy, :application => application)
 end
 
