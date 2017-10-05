@@ -166,6 +166,7 @@ sub vcl_deliver {
     set resp.http.Cache-Control = "private, no-cache";
     set resp.http.X-CF-Passed-Proto = req.http.CloudFront-Forwarded-Proto;
     set resp.http.X-High-Performance = req.http.X-High-Performance;
+    set resp.http.X-Cerberus = "true";
     unset resp.http.X-Powered-By;
     unset resp.http.Server;
 }
